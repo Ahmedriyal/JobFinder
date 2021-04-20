@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto&family=Ubuntu&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.navbar{
+    display: flex;
+    padding: 10px;
+    background: rgb(41, 41, 41);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    cursor: pointer;
+
+}
+
+.logo{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #a6d32b;
+    /* font-family: montserrat; */
+    padding: 0px 10px;
+    font-size: 25px;
+    /* font-weight: bold; */
+    font-style: italic;
+}
+
+.nav-list{
+    width: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-list li{
+    list-style: none;
+    padding: 5px 10px;
+    /* align-items: ; */
+
+}
+
+.nav-list li a{
+    text-decoration: none;
+    color: white;
+    padding: 7px 30px;
+    font-family: ubuntu;
+    font-size: 17px;
+    /* font-weight: bold; */
+    letter-spacing: 0.05em;
+    text-transform: none;
+}
+
+.nav-list li a:hover, .nav-list li a.active{
+    /* color: grey; */
+    /* border: 2px solid white; */
+    /* padding: 5px 28px; */
+    border-radius: 5px;
+    background: rgb(58, 58, 58);
+}
+
+.dropdown {
+    display: none;
+}
+
+.nav-list li:hover .dropdown{
+    display: block;
+    position: absolute;
+    background: rgb(41, 41, 41);
+    margin-top: 5px;
+    /* margin-left: 15px; */
+}
+
+.nav-list li:hover .dropdown ul{
+    display: block;
+    margin-top: 10px;
+}
+
+.nav-list li:hover .dropdown ul li{
+    padding: 10px;
+}
+
+
+.rightNav{
+    text-align: right;
+    /* width: 20%; */
+    padding: 0px 30px;
+    display: flex;
+}
+
+.dis{
+    padding: 0px 5px;
+}
+
+
+.btn{
+    padding: 8px 17px;
+    /* border-radius: 6px; */
+    border: 1px solid #a6d32b;
+    background: #a6d32b;
+    color: white;
+    font-size: 16px;
+    font-family: Ubuntu;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background: #90b91e;
+}
+
+.burger{
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    top: 15px;
+}
+
+.line{
+    width: 33px;
+    background-color: white;
+    margin: 5px 3px;
+    height: 4px;
+}
+
+.user{
+    color: white;
+    text-decoration: none;
+    /* text-align: center; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    padding-right: 10px;
+    font-family: 'Ubuntu';
+    font-size: 17px;
+    margin-top: 8px;
+}
+
+.fa{
+    padding-right: 5px;
+    font-size: 18px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.container {
+    margin: 0 auto;
+    /* width: 960px; */
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+h1, h2, h3{
+    font-family: Montserrat;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    text-transform: none;
+}
+
+.title {
+    background: #f8f8f8;
+    padding-bottom: 15px;
+    padding-top: 100px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.container {
+    margin: 0 auto;
+    width: 960px;
+    line-height: 1.75em;
+    padding-bottom: 30px;
+}
+
+p{
+    font-family: 'Ubuntu';
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* margin: auto; */
+    /* text-align: center; */
+    padding-right: 120px;
+}
+
+.Post{
+    margin: 5px 0px;
+    padding: 8px 32px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #a6d32b;
+    background: #a6d32b;
+    color: white;
+    cursor: pointer;
+    /* font-family: Ubuntu; */
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #495057;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+
+
+
+/* responsive */
+
+@media only screen and (max-width: 1145px){
+    .navbar{
+        flex-direction: column;
+        padding: 5px 0px;
+        transition: all .5s ease-out;
+        height: 330px;
+    }
+
+    .rightNav{
+        flex-direction: column;
+    }
+
+    .nav-list{
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .nav-list li{
+        margin: 5px;
+    }
+
+    .rightNav{
+        flex-direction: column;
+    }
+
+    .dis{
+        padding-bottom: 8px;
+        padding-right: 10px;
+    }
+
+    .burger{
+        display: block;
+    }
+
+    .user{
+        padding-bottom: 10px;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .h-nav-resp{
+        height: 60px;
+    }
+
+    .visibility-resp{
+        opacity: 0;
+    }
+
+    .dropdown {
+        display: none;
+    }
+
+    .nav-list li:hover .dropdown{
+        display: inline-block;
+        background: rgb(41, 41, 41);
+        margin-top: -15px;
+        /* margin-left: -20px; */
+    }
+
+
+    /* .nav-list li:hover .dropdown ul{
+        display: block;
+        margin: 10px;
+    } */
+
+    /* .nav-list li:hover .dropdown ul li{
+        padding: 10px;
+    } */
+
+
+}

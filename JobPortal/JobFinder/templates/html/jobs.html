@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/jobs.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav class="navbar h-nav-resp">
+        <label class="logo">JobFinder</label>
+        <ul class="nav-list visibility-resp">
+            <li><a href="{% url 'jobfinder' %}">Home</a></li>
+            <li><a href="#jobs">Jobs</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li><a href="{% url 'jobpost' %}">Add Job</a></li>
+                        <li><a href="#">Search Job</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="{% url 'resumes' %}">Resumes</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li><a href="{% url 'addResume' %}">Add Resume</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#about">About Us</a></li>
+        </ul>
+
+        <div class="rightNav visibility-resp">
+            {% if user.is_authenticated %}
+             <p class="user"><a href="{% url 'profile' %}"><i class="fa fa-user"></i> {{user.username}}</a></p>
+             <a href="{% url 'logout' %}">
+                <button class="btn">Logout</button>
+            </a>
+             {% else %}
+             <a class="dis" href="{% url 'login' %}">
+                 <button class="btn">Login</button>
+            </a>
+             <a href="{% url 'register' %}">
+                <button class="btn">Register</button>
+             </a>
+
+             {% endif %}
+       </div>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </nav>
+
+    <section class="container">
+        <ul class="job_listings">
+            {% for job in jobs %}
+            <li>
+                <a href="">
+                    <div class="image">
+                        <img class="company_logo"
+                            src="{{job.company_logo.url}}"
+                            alt="{{job.company_name}}">
+                    </div>
+                    <div class="description">
+                        <h3>{{job.job_title}}</h3>
+                        <ul>
+                            <li class="job-type"><label>Job type: </label>Full Time</li>
+                            <li class="company"><label>Company name: </label>{{job.company_name}}</li>
+                            <li class="location"><label>Location: </label>{{job.job_location}}</li>
+                            <li class="salary"><label>Salary: </label>{{job.salary_per_month}}</li>
+                            <li class="application-deadline"><label>Posted: </label>{{job.created_at}}</li>
+                            <li class="application-deadline"><label>Closes: </label>{{job.deadline}}</li>
+                        </ul>
+                    </div>
+                </a>
+                <div class="viewBtn">
+                    <a class="viewButton" href="{% url 'job_detail' job.id %}">View Details</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% load static %}
+    <script src="{% static 'js/resp.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto&family=Ubuntu&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.navbar{
+    display: flex;
+    padding: 10px;
+    background: rgb(41, 41, 41);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    cursor: pointer;
+
+}
+
+.logo{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #a6d32b;
+    /* font-family: montserrat; */
+    padding: 0px 10px;
+    font-size: 25px;
+    /* font-weight: bold; */
+    font-style: italic;
+}
+
+.nav-list{
+    width: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-list li{
+    list-style: none;
+    padding: 5px 10px;
+    /* align-items: ; */
+
+}
+
+.nav-list li a{
+    text-decoration: none;
+    color: white;
+    padding: 7px 30px;
+    font-family: ubuntu;
+    font-size: 17px;
+    /* font-weight: bold; */
+    letter-spacing: 0.05em;
+    text-transform: none;
+}
+
+.nav-list li a:hover, .nav-list li a.active{
+    /* color: grey; */
+    /* border: 2px solid white; */
+    /* padding: 5px 28px; */
+    border-radius: 5px;
+    background: rgb(58, 58, 58);
+}
+
+.dropdown {
+    display: none;
+}
+
+.nav-list li:hover .dropdown{
+    display: block;
+    position: absolute;
+    background: rgb(41, 41, 41);
+    margin-top: 5px;
+    /* margin-left: 15px; */
+}
+
+.nav-list li:hover .dropdown ul{
+    display: block;
+    margin-top: 10px;
+}
+
+.nav-list li:hover .dropdown ul li{
+    padding: 10px;
+}
+
+
+.rightNav{
+    text-align: right;
+    /* width: 20%; */
+    padding: 0px 30px;
+    display: flex;
+}
+
+.dis{
+    padding: 0px 5px;
+}
+
+.btn{
+    padding: 8px 17px;
+    /* border-radius: 6px; */
+    border: 1px solid #a6d32b;
+    background: #a6d32b;
+    color: white;
+    font-size: 16px;
+    font-family: Ubuntu;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background: #90b91e;
+}
+
+.container{
+    display: flex;
+    font-family: ubuntu;
+    width: 80%;
+    justify-content: center;
+    /* align-items: center; */
+    margin: auto;
+}
+
+.signIn{
+    width: 50%;
+    padding: 100px 8px;
+    padding-left: 40px;
+    margin-top: 85px;
+}
+
+.formsignIn{
+    /* border: 2px solid red; */
+    padding: 10px 10px;
+    margin-top: 14px;
+}
+
+.username{
+    padding: 5px 0px;
+}
+
+.required{
+    color: red;
+}
+
+.email{
+    margin-top: 20px;
+    padding: 5px 0px;
+}
+
+.form1-input{
+    width: 90%;
+    padding: 8px;
+    /* font-size: 16px; */
+}
+
+.password{
+    margin-top: 20px;
+    padding: 5px 0px;
+}
+
+.forgot{
+    padding: 3px 0px;
+    margin-top: 5px;
+}
+
+.remember{
+    padding: 3px;
+
+    margin: 10px 0 6px;
+}
+
+.log{
+    margin: 5px 0px;
+    padding: 8px 32px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #a6d32b;
+    background: #a6d32b;
+    color: white;
+    cursor: pointer;
+    /* font-family: Ubuntu; */
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+}
+
+h1{
+    text-align: left;
+    font-size: 32px;
+}
+
+.redirect{
+    font-family: ubuntu;
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.link{
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+.burger{
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    top: 15px;
+}
+
+.line{
+    width: 33px;
+    background-color: white;
+    margin: 5px 3px;
+    height: 4px;
+}
+
+.info{
+    list-style: none;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Montserrat';
+    margin-bottom: 30px;
+}
+
+/* responsive */
+
+@media only screen and (max-width: 1000px){
+    .navbar{
+        flex-direction: column;
+        padding: 5px 0px;
+        transition: all .5s ease-out;
+        height: 330px;
+    }
+
+    .nav-list{
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .nav-list li{
+        margin: 5px;
+    }
+
+    .rightNav{
+        flex-direction: column;
+    }
+
+    .dis{
+        padding-bottom: 8px;
+        padding-right: 10px;
+    }
+
+    .burger{
+        display: block;
+    }
+
+    .h-nav-resp{
+        height: 60px;
+    }
+
+    .visibility-resp{
+        opacity: 0;
+    }
+
+    .container{
+        flex-direction: column;
+    }
+
+    .signIn{
+        list-style: none;
+        text-align: center;
+        padding: 15px;
+        background: aliceblue;
+        font-size: 16px;
+    }
+
+    /* .signUp{
+        width: 100%;
+        padding: 0px 8px;
+        margin: 100px 0px;
+        border-left: none;
+    } */
+
+}

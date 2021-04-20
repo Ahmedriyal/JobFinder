@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Detail</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/job_detail.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav class="navbar h-nav-resp">
+        <label class="logo">JobFinder</label>
+        <ul class="nav-list visibility-resp">
+            <li><a href="{% url 'jobfinder' %}">Home</a></li>
+            <li><a href="{% url 'jobs' %}">Jobs</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'jobpost' %}">Add Job</a>
+                            {% else %}
+                            <a href="{% url 'login' %}">Add Job</a>
+                            {% endif %}
+                        </li>
+                        <li><a href="#">Search Job</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                {% if user.is_authenticated %}
+                <a href="{% url 'resumes' %}">Resumes</a>
+                {% else %}
+                <a href="{% url 'login' %}">Resume</a>
+                {% endif %}
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'addResume' %}">Add Resume</a>
+                            {% else %}
+                            <a href="{% url 'login' %}">Add Resume</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#about">About Us</a></li>
+        </ul>
+
+         <div class="rightNav visibility-resp">
+             {% if user.is_authenticated %}
+             <p class="user"><a href="{% url 'profile' %}"><i class="fa fa-user"></i> {{user.username}}</a></p>
+             <a href="{% url 'logout' %}">
+                <button class="btn">Logout</button>
+            </a>
+             {% else %}
+             <a class="dis" href="{% url 'login' %}">
+                 <button class="btn">Login</button>
+            </a>
+             <a href="{% url 'register' %}">
+                <button class="btn">Register</button>
+             </a>
+
+             {% endif %}
+        </div>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </nav>
+
+    <section class="container">
+        <div class="job_listings">
+
+            <div class="description">
+                <h3>{{jobs.job_title}}</h3>
+                <ul>
+                    <li class="location">{{jobs.job_location}}</li>
+                    <li class="job-type">{{jobs.jobType}}</li>
+                    <h5 class="desc">Job Description:</h5>
+                    <li class="job-description">{{jobs.job_description}}</li>
+                    <li class="salary"><label>Working days per week: </label>{{jobs.working_days}}</li>
+                    <li class="salary"><label>Salary: </label>{{jobs.salary_per_month}}</li>
+                    <li class="application-deadline"><label>Application Deadline: </label>{{jobs.deadline}}</li>
+                </ul>
+
+                <div class="btn2">
+                    <button class="Post"> <a href="{% url 'apply' jobs.id %}">Apply</a></button>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="description">
+                <h3 class="Cdetails">Company Details:</h3>
+                <h4 class="Cname">{{jobs.company_name}}</h4>
+                <ul>
+                    <li class="address"><i class="fa fa-map-marker"></i>{{jobs.company_address}}</li>
+                    <li class="mobile"><i class="fa fa-phone"></i>{{jobs.company_contact}}</li>
+                    <li class="email"><i class="fa fa-envelope"></i>{{jobs.company_email}}</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    {% load static %}
+    <script src="{% static 'js/resp.js' %}"></script>
+</body>
+</html>

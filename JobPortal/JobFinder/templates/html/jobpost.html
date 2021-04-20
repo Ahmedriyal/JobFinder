@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a job</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/jobpost.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav class="navbar h-nav-resp">
+        <label class="logo">JobFinder</label>
+        <ul class="nav-list visibility-resp">
+            <li><a href="{% url 'jobfinder' %}">Home</a></li>
+            <li><a href="{% url 'jobs' %}">Jobs</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li><a href="#">Add Job</a></li>
+                        <li><a href="#">Search Job</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="{% url 'resumes' %}">Resumes</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li><a href="{% url 'addResume' %}">Add Resume</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#about">About Us</a></li>
+        </ul>
+
+         <div class="rightNav visibility-resp">
+             {% if user.is_authenticated %}
+             <p class="user"><a href="{% url 'profile' %}"><i class="fa fa-user"></i> {{user.username}}</a></p>
+             <a href="{% url 'logout' %}">
+                <button class="btn">Logout</button>
+            </a>
+             {% else %}
+             <a class="dis" href="{% url 'login' %}">
+                 <button class="btn">Login</button>
+            </a>
+             <a href="{% url 'register' %}">
+                <button class="btn">Register</button>
+             </a>
+
+             {% endif %}
+        </div>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </nav>
+
+    <section class="title">
+        <div class="container">
+            <h1>Add a Job</h1>
+        </div>
+    </section>
+
+{% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+<!-- Job information -->
+    <section class="content">
+        <div class="container">
+
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="job_title">
+                    <label for="jobTitle">Job Title</label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="job_title" id="jobTitle" placeholder="e.g. Web Developer">
+                    </div>
+                </fieldset>
+
+                <fieldset class="job_location">
+                    <label for="job_location">Location</label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="job_location" id="job_location" placeholder="e.g. &quot;Dhaka&quot;">
+                    </div>
+                </fieldset>
+
+                <fieldset class="job_type">
+                    <label for="job_type">Job type</label>
+                    <div class="required_field">
+                        <select name="jobType" id="jobType" class="form-input" aria-label="Default select example">
+
+                            <option value="Full_time">Full Time</option>
+                            <option value="Part_time">Part Time</option>
+                            <option value="Internship">Internship</option>
+
+                        </select>
+                        <small class="description">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</small>
+
+
+                    </div>
+                </fieldset>
+
+                <fieldset class="job_category">
+                    <label for="job_category">Job category</label>
+                    <div class="required_field">
+                        <select name="job_category" id="job_category" class="form-input" aria-label="Default select example">
+                            <option selected>Choose category</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="IT">IT</option>
+                            <option value="Management">Management</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Civil Engineering">Civil Engineering</option>
+                            <option value="Electrical Engineerin">Electrical Engineering</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <fieldset class="job_tags">
+                    <label for="job_tags">Job tags</label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="job_tags" id="job_tags" placeholder="e.g. PHP, Social Media, Management">
+                            <small class="description">Comma separate tags, such as required skills or technologies, for this job.</small>
+                    </div>
+                </fieldset>
+
+                <fieldset class="job_description">
+                    <label for="job_description">Description</label>
+                    <div class="required_field">
+                            <textarea class="description" rows="10" autocomplete="off" cols="40" name="job_description" id="job_description"></textarea>
+                    </div>
+                </fieldset>
+
+                <fieldset class="application">
+                    <label for="application">Application email/URL</label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="application" id="application" placeholder="Enter an email address or website URL">
+                    </div>
+                </fieldset>
+
+                <fieldset class="salary">
+                    <label for="salary_per_month">Salary per month</label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="salary_per_month" id="salary_per_month" placeholder="e.g. 20000">
+                    </div>
+                </fieldset>
+
+                <fieldset class="days">
+                    <label for="working_days">Working days per week</label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="working_days" id="working_days" placeholder="e.g. 5 days">
+                    </div>
+                </fieldset>
+
+                <fieldset class="apply_link">
+                    <label for="apply_link">External "Apply for Job" link <small>(optional)</small></label>
+                    <div class="required_field"">
+                        <input type="text" class="form-input" name="apply_link" id="apply_link" placeholder="http://">
+                    </div>
+                </fieldset>
+
+                <fieldset class="deadline">
+                    <label for="deadline">Application deadline</label>
+                    <div class="required_field">
+                        <input type="date" class="form-input" name="deadline" id="deadline" required="">
+                    </div>
+                </fieldset>
+
+                <!-- Company Information -->
+
+                <h2>Company Details</h2>
+
+                <fieldset class="company_name">
+					<label for="company_name">Company name</label>
+					<div class="required_field">
+						<input type="text" class="input-text" name="company_name" id="company_name" placeholder="Enter the name of the company" value="" maxlength="" required="">
+					</div>
+				</fieldset>
+
+                <fieldset class="company_website">
+					<label for="company_website">Website <small>(optional)</small></label>
+					<div class="required_field">
+						<input type="text" class="input-text" name="company_website" id="company_website" placeholder="http://" value="" maxlength="">
+					</div>
+				</fieldset>
+
+                <fieldset class="company_address">
+					<label for="company_address">Company address</label>
+					<div class="required_field">
+						<input type="text" class="input-text" name="company_address" id="company_address" placeholder=" e.g. 8th floor, Plot-02, Amtoli, Bir Uttam Ak Khandaker Rd, Dhaka 1212" value="" maxlength="" required="">
+					</div>
+				</fieldset>
+
+                <fieldset class="company_contact">
+					<label for="company_contact">Company contact no.</label>
+					<div class="required_field">
+						<input type="text" class="input-text" name="company_contact" id="company_contact" placeholder="01XXX" value="" maxlength="">
+					</div>
+				</fieldset>
+
+                <fieldset class="company_email">
+					<label for="company_email">Company email</label>
+					<div class="required_field">
+						<input type="email" class="input-text" name="company_email" id="company_email">
+					</div>
+				</fieldset>
+
+                <fieldset class="facebook_link">
+					<label for="facebook_link">Facebook link <small>(optional)</small></label>
+					<div class="required_field">
+						<input type="text" class="input-text" name="facebook_link" id="facebook_link" placeholder="http://" value="" maxlength="">
+					</div>
+				</fieldset>
+
+                <fieldset class="companylogo">
+					<label for="company_logo">Logo <small>(optional)</small></label>
+					<div class="required_field">
+						<div class="uploaded-files"></div>
+
+                    <input type="file" class="input-text" data-file_types="jpg|jpeg|gif|png" name="company_logo" id="company_logo" placeholder="">
+                    <small class="description">Maximum file size: 1 MB.	</small>
+					</div>
+				</fieldset>
+
+                <div class="btn2">
+                    <button class="Post">Post</button>
+                </div>
+
+
+
+            </form>
+        </div>
+    </section>
+    {% load static %}
+    <script src="{% static 'js/resp.js' %}"></script>
+</body>
+</html>

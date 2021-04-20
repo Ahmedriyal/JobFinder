@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build your resume</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/addResume.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav class="navbar h-nav-resp">
+        <label class="logo">JobFinder</label>
+        <ul class="nav-list visibility-resp">
+            <li><a href="{% url 'jobfinder' %}">Home</a></li>
+            <li><a href="{% url 'jobs' %}">Jobs</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li><a href="{% url 'jobpost' %}">Add Job</a></li>
+                        <li><a href="#">Search Job</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="{% url 'resumes' %}">Resumes</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li><a href="{% url 'addResume' %}">Add Resume</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#about">About Us</a></li>
+        </ul>
+
+         <div class="rightNav visibility-resp">
+             {% if user.is_authenticated %}
+             <p class="user"><a href="{% url 'profile' %}"><i class="fa fa-user"></i> {{user.username}}</a></p>
+             <a href="{% url 'logout' %}">
+                <button class="btn">Logout</button>
+            </a>
+             {% else %}
+             <a class="dis" href="{% url 'login' %}">
+                 <button class="btn">Login</button>
+            </a>
+             <a href="{% url 'register' %}">
+                <button class="btn">Register</button>
+             </a>
+
+             {% endif %}
+        </div>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </nav>
+
+    <section class="title">
+        <div class="container">
+            <h1>Build your resume</h1>
+        </div>
+    </section>
+
+
+    <section class="content">
+        <div class="container">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="name">
+                    <label for="name">Your name</label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="name" id="name" required>
+                    </div>
+                </fieldset>
+
+                <fieldset class="Address">
+                    <label for="Address">Your address</label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="address" id="address" required>
+                    </div>
+                </fieldset>
+
+                <fieldset class="mobileNo">
+                    <label for="mobileNo">Your mobile number</label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="mobileNo" id="mobileNo" required>
+                    </div>
+                </fieldset>
+
+                <fieldset class="email">
+                    <label for="email">Your email</label>
+                    <div class="required_field">
+                        <input type="email" class="form-input" name="email" id="email" required>
+                    </div>
+                </fieldset>
+
+                <fieldset class="pTitle">
+                    <label for="pTitle">Your professional title</label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="title" id="title" placeholder="e.g. Web Developer" required>
+                    </div>
+                </fieldset>
+
+                <fieldset class="skills">
+                    <label for="skills">Skills  <small>(optional)</small></label>
+                    <div class="required_field">
+                        <input type="text" class="form-input" name="skills" id="skills" placeholder="Comma separate a list of relevant skills">
+                     </div>
+                </fieldset>
+
+                <fieldset class="objectives">
+                    <label for="objectives">Objectives</label>
+                    <div class="required_field">
+                            <textarea class="description" rows="10" autocomplete="off" cols="40" name="objectives" id="objectives"></textarea>
+                    </div>
+                </fieldset>
+
+                <fieldset class="pic">
+					<label for="pic">Your photo</label>
+					<div class="required_field">
+						<div class="uploaded-files"></div>
+
+                    <input type="file" class="input-text" data-file_types="jpg|jpeg|gif|png" name="pic" id="pic" placeholder="">
+                    <small class="description">Maximum file size: 1 MB.	</small>
+					</div>
+				</fieldset>
+
+                <fieldset class="resumeFile">
+					<label for="resumeFile">Resume File</label>
+					<div class="required_field">
+						<div class="uploaded-files"></div>
+
+                    <input type="file" class="input-text" data-file_types="pdf|doc|docx" name="resume_file" id="resume_file" placeholder="">
+                    <small class="description">Maximum file size: 1 MB.	</small>
+					</div>
+				</fieldset>
+
+                <div class="btn2">
+                    <button class="Post">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+    {% load static %}
+    <script src="{% static 'js/resp.js' %}"></script>
+</body>
+</html>

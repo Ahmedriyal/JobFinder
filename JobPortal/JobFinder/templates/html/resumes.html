@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/resume.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav class="navbar h-nav-resp">
+        <label class="logo">JobFinder</label>
+        <ul class="nav-list visibility-resp">
+            <li><a href="{% url 'jobfinder' %}">Home</a></li>
+            <li><a href="{% url 'jobs' %}">Jobs</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li>
+                            <a href="{% url 'jobpost' %}">Add Job</a>
+                        </li>
+                        <li><a href="#">Search Job</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#resumes">Resumes</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li>
+                            <a href="{% url 'addResume' %}">Add Resume</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#about">About Us</a></li>
+        </ul>
+
+         <div class="rightNav visibility-resp">
+             {% if user.is_authenticated %}
+             <p class="user"><a href="{% url 'profile' %}"><i class="fa fa-user"></i> {{user.username}}</a></p>
+             <a href="{% url 'logout' %}">
+                <button class="btn">Logout</button>
+            </a>
+             {% else %}
+             <a class="dis" href="{% url 'login' %}">
+                 <button class="btn">Login</button>
+            </a>
+             <a href="{% url 'register' %}">
+                <button class="btn">Register</button>
+             </a>
+
+             {% endif %}
+        </div>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </nav>
+
+    <section class="container">
+        <ul class="job_listings">
+            {% for resume in resumes %}
+            <li>
+                <a class="content">
+                    <div class="image">
+                        <img class="pic"
+                             src="{{resume.pic.url}}"
+                             alt="{{resume.name}}">
+                    </div>
+                    <div class="description">
+                        <h3>{{resume.name}}</h3>
+                        <ul>
+                            <li class="pTitle">{{resume.title}}</li>
+                            <li class="Address"><label>Address: </label>{{resume.address}}</li>
+                            <li class="email"><label>Email: </label>{{resume.email}}</li>
+                            <li class="mobileNo"><label>Mobile: </label>{{resume.mobileNo}}</li>
+                            <li class="skills"><label>Skills: </label>{{resume.skills}}</li>
+                        </ul>
+                    </div>
+                </a>
+                <div class="resume_file">
+                    <a class="resume" href='{{resume.resume_file.url}}' download>Click to download resume</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </section>
+
+    {% load static %}
+    <script src="{% static 'js/resp.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+    <nav class="navbar h-nav-resp">
+        <label class="logo">JobFinder</label>
+        <ul class="nav-list visibility-resp">
+            <li><a href="{% url 'jobfinder' %}">Home</a></li>
+            <li><a href="#jobs">Jobs</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li><a href="{% url 'jobpost' %}">Add Job</a></li>
+                        <li><a href="#">Search Job</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#resumes">Resumes</a>
+                <div class="dropdown visibility-resp">
+                    <ul>
+                        <li><a href="{% url 'addResume' %}">Add Resume</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#about">About Us</a></li>
+        </ul>
+
+         <div class="rightNav visibility-resp">
+            <a class="dis" href="{% url 'login' %}">
+                 <button class="btn">Login</button>
+            </a>
+             <a href="{% url 'register' %}">
+                <button class="btn">Register</button>
+             </a>
+        </div>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+
+    </nav>
+
+    <section class="container">
+
+        <div class="signUp">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <h1>SignUp</h1>
+	<form class="formsignUp" action="register" method="POST">
+            {% csrf_token %}
+                <p class="username">Username</p>
+                <input class="form1-input" type="text" name="username" id="username" placeholder="Username">
+
+                <p class="email">Email</p>
+                <input class="form1-input" type="email" name="email" id="email" placeholder="Email">
+
+
+                <p class="password">Password</p>
+                <input class="form1-input" type="password" name="password1" id="password1" placeholder="Password">
+
+                <p class="password">Re-type Password</p>
+                <input class="form1-input" type="password" name="password2" id="password2" placeholder="Confirm password">
+
+                <p class="register">Register as</p>
+                <select name="register" class="form1-input" aria-label="Default select example">
+                    <option value="employer">Employer</option>
+                    <option value="seeker">Seeker</option>
+                </select>
+
+                <div class="btn2">
+                    <button class="signup">Sign up</button>
+                </div>
+            </form>
+            <p class="redirect">Have an account? <a class="link" href="{% url 'login' %}">Login</a></p>
+
+        </div>
+
+    </section>
+   {% load static %}
+    <script src="{% static 'js/resp.js' %}"></script>
+</body>
+</html>
+
